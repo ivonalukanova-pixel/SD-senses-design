@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senses Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        /* Махаме всички излишни разстояния */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Правим страницата да заема целия екран */
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000;
+            color: white;
+            overflow: hidden;
+        }
+
+ .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Бута логото нагоре, менюто надолу */
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 20px 0; /* Общо разстояние от краищата на екрана */
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),  
+                url('int.jpg') no-repeat center center/cover;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Логото - малко по-нагоре */
+.logo-wrap {
+    margin-top: 10px;
+height: 100px;
+}
+
+/* СРЕДАТА - Тази част заема цялото място и центрира текста точно над масата */
+.main-content {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+margin-top: -100px;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: 9px;
+    font-weight: 200;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+text-shadow: 
+        0 0 10px rgba(245, 222, 179, 0.8), /* По-топъл, пшеничен нюанс за дефиниция */
+        0 0 30px rgba(210, 180, 140, 0.5);
+}
+h1 {
+    line-height: 1.4; /* Прави текста по-елегантен */
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+/* Стил за бутона */
+.back-btn {
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 15px 45px;
+    border-radius: 50px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.back-btn:hover {
+    background: white;
+    color: black;
+box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+}
+
+/* Менюто най-долу */
+.footer-nav {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.footer-nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    letter-spacing: 2.6px;
+    transition: 0.3s;
+position: relative;    /* Важно за позиционирането на линията */
+    padding-bottom: 4px;
+}
+
+.footer-nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;           /* Линията е дълга колкото текста */
+    height: 1px;           /* Дебелина на линията */
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.5); /* Цвят на линията */
+    transform: scaleX(0);  /* В началото е невидима (дължина 0) */
+    transition: transform 0.3s ease; /* Плавна поява */
+}
+
+/* КОГАТО МИШКАТА Е ОТГОРЕ */
+.footer-nav a:hover {
+    color: white;
+text-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.8), 
+        0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* ЛИНИЯТА СЕ РАЗТЯГА ПЛАВНО */
+.footer-nav a:hover::after {
+    transform: scaleX(1);  /* Става на 100% дължина */
+}
+        /* За мобилни телефони */
+        @media (max-width: 600px) {
+            .footer-nav { flex-direction: column; gap: 10px; }
+            .main-content { margin-bottom: 0; }
+        }
+    </style>
+</head>
+<body>
+
+ <section class="hero">
+    
+    <div class="logo-wrap">
+        <img src="лого.png" style="width: 140px;" alt="Senses Design">
+    </div>
+
+    <div class="main-content">
+        <h1>ИНТЕРИОР, КОЙТО<br>СЕ ЧУВСТВА</h1>
+        <a href="conceptual.html" class="back-btn">ОТКРИЙ ПОВЕЧЕ</a>
+    </div>
+
+    <nav class="footer-nav">
+        <a href="about.html">ABOUT US</a>
+        <a href="conceptual.html">CONCEPTUAL WORKS</a>
+        <a href="contact.html">CONTACT US</a>
+<a href="privacy.html" style="font-size: 12px; opacity: 0.8; margin-left: 20px;">PRIVACY POLICY</a>
+
+    </nav>
+
+</section>
+
+</body>
+</html>
