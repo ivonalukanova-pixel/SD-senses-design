@@ -225,15 +225,17 @@ text-shadow:
     flex-direction: row !important; /* Гарантира, че са в един ред */
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     
     /* ТЕЗИ РЕДОВЕ ЩЕ ГО ГУ НАПРАВЯТ ВИДИМО: */
     position: absolute;
-    bottom: 0px; /* Разстояние от самия долен ръб на екрана */
+   bottom: 5px !important;    /* Намали от 20px на 5px, за да слезе почти до ръба */
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 999; /* Да излезе над всички други елементи */
+    
+    padding-bottom: 0 !important; /* Махаме всякакви разстояния отдолу */
+    z-index: 999;
 }
 
 .footer-nav a {
