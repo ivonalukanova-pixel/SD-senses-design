@@ -72,6 +72,33 @@
     color: #333;                /* Текстът става тъмно сив/черен */
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); /* Добавя и сиянието, за което говорихме */
 }
+        @media (max-width: 600px) and (orientation: portrait) {
+    /* Основният контейнер (кутията с размития фон) */
+    .about-container { /* Сменете с вашия клас, напр. .about-box */
+        width: 90% !important; /* Увеличаваме широчината на 90% от екрана */
+        max-width: none !important;
+        padding: 40px 20px !important; /* Повече място отгоре/отдолу, по-малко отстрани */
+        margin: 0 auto !important; /* Центриране */
+        border-radius: 30px !important; /* Заоблени краища като на снимката */
+    }
+
+    /* Заглавието ABOUT US */
+    .about-container h2 {
+        font-size: 2.5rem !important;
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Параграфите с текст */
+    .about-container p {
+        font-size: 1rem !important; /* Идеален размер за четене на мобилен */
+        line-height: 1.6 !important; /* По-голямо разстояние между редовете за лекота */
+        text-align: center !important; /* Центриран текст */
+        width: 100% !important;
+        padding: 0 10px !important; /* Да не опира плътно в ръбовете на кутията */
+    }
+}
 
     </style>
 </head>
