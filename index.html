@@ -150,23 +150,31 @@ text-shadow:
             letter-spacing: 3px;
         }
 
-        /* Хоризонтално меню на един ред */
-        .footer-nav {
-            flex-direction: row; /* Задължително в ред */
-            flex-wrap: nowrap; /* Да не прехвърля на нов ред */
-            justify-content: center;
-            align-items: center;
-            gap: 12px; /* Малко разстояние между линковете */
-            width: 100%;
-            padding-bottom: 30px;
-        }
+       /* Хоризонтално меню на един ред - КОРИГИРАНО */
+.footer-nav {
+    display: flex !important;
+    flex-direction: row !important; /* Връща ги в една линия */
+    flex-wrap: nowrap !important;   /* Забранява нов ред */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;                     /* Намалено разстояние, за да се събере всичко */
+    
+    position: absolute;            /* КЛЮЧОВО: Откъсва го от потока и го заковава */
+    bottom: 20px;                  /* Фиксира го на 20px от долния ръб */
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;                   /* Да е над картинката */
+}
 
-        .footer-nav a {
-            font-size: 9px !important; /* По-малък шрифт, за да се съберат на един ред */
-            white-space: nowrap; /* Предотвратява счупването на думите */
-            margin-left: 0 !important; /* Премахваме фиксирания марджин */
-            letter-spacing: 1px;
-        }
+.footer-nav a {
+    font-size: 8px !important;     /* Малко по-малък шрифт за по-сигурно */
+    white-space: nowrap;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin: 0 !important;          /* Чистим всякакви стари марджини */
+}
     }
 
     /* Стил за хоризонтален телефон (Landscape) */
