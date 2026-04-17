@@ -167,17 +167,44 @@ text-shadow:
     }
 
     /* Стил за хоризонтален телефон (Landscape) */
-    @media (max-width: 900px) and (orientation: landscape) {
-        .hero {
-            background-image: url('int.jpg'); /* Връща хоризонталната снимка */
-        }
-        .footer-nav {
-            flex-direction: row;
-            gap: 20px;
-            padding-bottom: 10px;
-        }
+   @media (max-width: 950px) and (orientation: landscape) {
+    /* 1. Намаляваме общия мащаб, за да не се бутат елементите */
+    .hero {
+        height: 100vh; /* Задължително фиксираме височината */
+        padding: 10px 0; /* Малко отстояние от краищата */
+        justify-content: space-around; /* Разпределя елементите по-равномерно */
+    }
 
-        }
+    /* 2. Намаляваме логото */
+    .logo-wrap img {
+        width: 80px !important; /* Значително по-малко за широк екран */
+        margin-top: 5px;
+    }
+
+    /* 3. Оправяме заглавието - това е най-важното */
+    .main-content h1 {
+        font-size: 1.2rem !important; /* Смаляваме шрифта драстично */
+        line-height: 1.2;
+        margin: 5px 0;
+        letter-spacing: 2px;
+    }
+
+    /* 4. Смаляваме бутона */
+    .back-btn {
+        padding: 8px 20px !important;
+        font-size: 10px !important;
+    }
+
+    /* 5. Долното меню */
+    .footer-nav {
+        gap: 15px;
+        padding-bottom: 5px;
+    }
+
+    .footer-nav a {
+        font-size: 8px !important;
+    }
+}
     </style>
 </head>
 <body>
