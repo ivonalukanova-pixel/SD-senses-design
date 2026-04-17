@@ -218,15 +218,28 @@ text-shadow:
         margin-top: 15px !important;
     }
 
-    /* 5. Долното меню */
     .footer-nav {
-        gap: 15px;
-        padding-bottom: 5px;
-    }
+    display: flex !important;
+    flex-direction: row !important; /* Гарантира, че са в един ред */
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    
+    /* ТЕЗИ РЕДОВЕ ЩЕ ГО ГУ НАПРАВЯТ ВИДИМО: */
+    position: absolute;
+    bottom: 25px; /* Разстояние от самия долен ръб на екрана */
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999; /* Да излезе над всички други елементи */
+}
 
-    .footer-nav a {
-        font-size: 9px !important;
-    }
+.footer-nav a {
+    font-size: 8.5px !important; /* Малко по-малък шрифт за сигурност */
+    color: white;
+    text-decoration: none;
+    white-space: nowrap; /* Да не пренася на нов ред */
+}
 }
     </style>
 </head>
