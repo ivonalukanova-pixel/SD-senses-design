@@ -130,10 +130,53 @@ text-shadow:
 .footer-nav a:hover::after {
     transform: scaleX(1);  /* Става на 100% дължина */
 }
-        /* За мобилни телефони */
-        @media (max-width: 600px) {
-            .footer-nav { flex-direction: column; gap: 10px; }
-            .main-content { margin-bottom: 0; }
+        /* Стил за мобилна версия (Вертикален телефон) */
+    @media (max-width: 600px) and (orientation: portrait) {
+        .hero {
+            /* Тук слагате новата картинка 9:16 */
+            background-image: url('мобиле.jpg'); 
+        }
+
+        .logo-wrap img {
+            width: 100px !important; /* Малко по-малко лого за мобилни */
+            margin-top: 30px;
+        }
+
+        .main-content h1 {
+            font-size: 1.8rem; /* Напасване на мащаба на текста */
+            letter-spacing: 3px;
+        }
+
+        /* Хоризонтално меню на един ред */
+        .footer-nav {
+            flex-direction: row; /* Задължително в ред */
+            flex-wrap: nowrap; /* Да не прехвърля на нов ред */
+            justify-content: center;
+            align-items: center;
+            gap: 12px; /* Малко разстояние между линковете */
+            width: 100%;
+            padding-bottom: 30px;
+        }
+
+        .footer-nav a {
+            font-size: 9px !important; /* По-малък шрифт, за да се съберат на един ред */
+            white-space: nowrap; /* Предотвратява счупването на думите */
+            margin-left: 0 !important; /* Премахваме фиксирания марджин */
+            letter-spacing: 1px;
+        }
+    }
+
+    /* Стил за хоризонтален телефон (Landscape) */
+    @media (max-width: 900px) and (orientation: landscape) {
+        .hero {
+            background-image: url('int.jpg'); /* Връща хоризонталната снимка */
+        }
+        .footer-nav {
+            flex-direction: row;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
         }
     </style>
 </head>
