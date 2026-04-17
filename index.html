@@ -132,15 +132,37 @@ text-shadow:
 }
         /* Стил за мобилна версия (Вертикален телефон) */
     /* Стил за мобилна версия (Вертикален телефон) */
+/* УНИВЕРСАЛНИ НАСТРОЙКИ (Добавени в началото) */
+* {
+    box-sizing: border-box; /* Гарантира, че padding не раздува елементите */
+    -webkit-tap-highlight-color: transparent; /* Премахва синьото подчертаване при докосване на телефон */
+    -webkit-font-smoothing: antialiased; /* По-гладки шрифтове за Safari/Chrome */
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Спира хоризонталното мърдане на екрана */
+    -ms-text-size-adjust: 100%; /* Спира автоматичното преоразмеряване на текст в някои браузъри */
+    -webkit-text-size-adjust: 100%;
+}
+
+img {
+    max-width: 100%; /* Предпазва снимките от излизане извън контейнера */
+    height: auto;
+}
+
+/* Стил за мобилна версия (Вертикален телефон) */
 @media (max-width: 600px) and (orientation: portrait) {
     .hero {
-background-image:
-   linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+        background-image:
+            linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
             url('mobile.jpg') !important;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        /* Важно за мобилни: */
+        /* Важно за мобилни: dvh решава проблема с лентите на браузъра */
         height: 100dvh !important; 
         position: relative;
         overflow: hidden;
@@ -154,8 +176,6 @@ background-image:
     .main-content h1 {
         font-size: 1.4rem;
         letter-spacing: 3px;
-        /* КОРЕКЦИЯ ТУК: затворена скоба */
-       
         transform: translateY(-65px) !important;
     }
 
@@ -169,20 +189,22 @@ background-image:
         gap: 10px;
         
         position: absolute;
-        bottom: 30px; /* Малко по-високо от самото дъно */
+        bottom: 30px; 
         left: 0;
         right: 0;
         width: 100%;
         z-index: 99;
     }
-.back-btn {
+
+    .back-btn {
         padding: 8px 20px !important;
         font-size: 10px !important;
-    position: relative;
-    top: -90px;
+        position: relative;
+        top: -90px;
     }
+
     .footer-nav a {
-        font-size: 8.5px !important; /* Леко намален за сигурност */
+        font-size: 8.5px !important;
         white-space: nowrap;
         text-decoration: none;
         color: #fff;
@@ -190,32 +212,30 @@ background-image:
         margin: 0 !important;
     }
 }
-    /* Стил за хоризонтален телефон (Landscape) */
-   @media (max-width: 950px) and (orientation: landscape) {
-    /* 1. Намаляваме общия мащаб, за да не се бутат елементите */
+
+/* Стил за хоризонтален телефон (Landscape) */
+@media (max-width: 950px) and (orientation: landscape) {
     .hero {
-        height: 100vh; /* Задължително фиксираме височината */
-        padding: 10px 0; /* Малко отстояние от краищата */
-        justify-content: space-around; /* Разпределя елементите по-равномерно */
+        height: 100vh; 
+        padding: 10px 0;
+        justify-content: space-around;
+        position: relative;
+        overflow: hidden;
     }
 
-    /* 2. Намаляваме логото */
     .logo-wrap img {
-        width: 90px !important; /* Значително по-малко за широк екран */
+        width: 90px !important;
         margin-top: 5px;
     }
 
-    /* 3. Оправяме заглавието - това е най-важното */
     .main-content h1 {
-        font-size: 1.6rem !important; /* Смаляваме шрифта драстично */
+        font-size: 1.6rem !important;
         line-height: 1.2;
         margin: 5px 0;
         letter-spacing: 2px;
-        transform: translateY(-30px) !important; /* Колкото по-голямо е числото, толкова по-нагоре отива */
-
+        transform: translateY(-30px) !important;
     }
 
-    /* 4. Смаляваме бутона */
     .back-btn {
         padding: 8px 20px !important;
         font-size: 10px !important;
@@ -223,30 +243,28 @@ background-image:
     }
 
     .footer-nav {
-    display: flex !important;
-    flex-direction: row !important; /* Гарантира, че са в един ред */
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    
-    /* ТЕЗИ РЕДОВЕ ЩЕ ГО ГУ НАПРАВЯТ ВИДИМО: */
-    position: absolute;
-   bottom: 5px !important;    /* Намали от 20px на 5px, за да слезе почти до ръба */
-    left: 0;
-    right: 0;
-    width: 100%;
-    
-   bottom: 0px !important; /* Залепя го за самия край */
-        padding-bottom: 4px !important; /* Минимално разстояние, за да не е съвсем застъпено */
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        bottom: 0px !important; 
+        padding-bottom: 4px !important; 
         margin-bottom: 0 !important;
-    z-index: 999;
-}
+        z-index: 999;
+    }
 
-.footer-nav a {
-    font-size: 8.5px !important; /* Малко по-малък шрифт за сигурност */
-    color: white;
-    text-decoration: none;
-    white-space: nowrap; /* Да не пренася на нов ред */
+    .footer-nav a {
+        font-size: 8.5px !important;
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+    }
 }
 }
     </style>
