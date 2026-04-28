@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senses Design | Дневник</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: url('int.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.42);
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .top-logo {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .top-logo img {
+            width: 110px;
+            height: auto;
+            opacity: 0.9;
+        }
+
+        .hero-section {
+            height: 62vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(1.1rem, 5vw, 3rem);
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            margin: 0;
+            font-weight: 200;
+            animation: fadeIn 3s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 15px;
+            color: #999;
+            margin-top: 30px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+            opacity: 0.8;
+            animation: fadeIn 4s ease-out;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            padding: 0 10% 50px 10%;
+            box-sizing: border-box;
+        }
+
+        .post-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            min-height: 350px;
+        }
+
+        .card-hover-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            filter: blur(20px);
+            transform: scale(1.1);
+            transition: opacity 0.8s ease, filter 0.8s ease, transform 1s ease;
+            z-index: 1;
+        }
+
+        .post-card:hover .card-hover-bg {
+            opacity: 1;
+            filter: blur(8px) brightness(0.6);
+            transform: scale(1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 5;
+            padding: 40px;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .date { 
+            font-size: 10px; color: #666; letter-spacing: 2px; 
+            text-transform: uppercase; margin-bottom: 20px; display: block;
+        }
+
+        .post-card h2 { 
+            font-size: 20px; margin: 10px 0 20px 0; 
+            font-weight: 300; letter-spacing: 2px; text-transform: uppercase;
+            color: white;
+        }
+
+        .post-card p { 
+            color: #bbb; line-height: 1.8; font-weight: 300; 
+            font-size: 14px; margin-bottom: 30px; 
+        }
+
+        .btn-open {
+            color: white; background: none; border: none;
+            border-bottom: 1px solid white; padding-bottom: 5px;
+            cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
+            font-size: 10px; font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        .btn-open:hover { color: #888; border-color: #888; }
+
+        .back-btn-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 80px;
+            margin-top: 20px;
+        }
+
+        .back-btn { 
+            display: inline-block;
+            color: white; 
+            text-decoration: none; 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            font-size: 11px; 
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background-color: white;
+            color: #1a1a1a;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show { display: flex; }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px) saturate(150%);
+            -webkit-backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 60px 80px;
+            max-width: 900px;
+            width: 90%;
+            border-radius: 35px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+            color: white;
+        }
+
+        .modal-content::-webkit-scrollbar { display: none; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: white; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { letter-spacing: 12px; font-size: 2rem; }
+            .hero-section p { letter-spacing: 3px; font-size: 0.8rem; }
+            .blog-grid { grid-template-columns: 1fr; padding-bottom: 50px; }
+            .modal-content { padding: 40px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="top-logo">
+            <img src="лого.png" alt="Senses Design">
+        </div>
+
+        <div class="hero-section">
+            <header>
+                <h1> ДИЗАЙНЕРСКИ Дневник</h1>
+                <p>Истории за вдъхновение, пространства и материи</p>
+            </header>
+        </div>
+
+        <section class="blog-grid">
+            <article class="post-card">
+                <div class="card-hover-bg" style="background-image: url('детайли.jpg');"></div>
+                <div class="card-content">
+                    <span class="date">27.04.2026</span>
+                    <h2>Естетиката на детайла</h2>
+                    <p>Как да вдъхнем класа на пространството.</p>
+                    <button class="btn-open" onclick="openModal('balans')">Виж повече</button>
+                </div>
+            </article>
+
+            <article class="post-card">
+                <div class="card-hover-bg" style="background-image: url('статия 2.jpg');"></div>
+                <div class="card-content">
+                    <span class="date">15.04.2026</span>
+                    <h2>Материя и дух</h2>
+                    <p>Защо естествените текстури са в основата на всеки вечен интериор.</p>
+                    <button class="btn-open" onclick="openModal('materiya')">Виж повече</button>
+                </div>
+            </article>
+        </section>
+
+        <div class="back-btn-container">
+            <a href="index.html" class="back-btn">НАЗАД КЪМ НАЧАЛО</a>
+        </div>
+    </div>
+
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const blogData = {
+            'balans': {
+                title: 'Естетиката на детайла',
+                text: `Луксът не винаги е въпрос на огромен бюджет, а на внимание към детайла. „Скъпият“ интериор е въпрос на хармония и качество на материалите.<br><br>
+    <strong>1. Бижутата на мебелите: Смяна на дръжките</strong><br>
+    Стандартните дръжки на масовите мебели често изглеждат евтини. Замяната им с такива от матиран месинг, черен метал или естествена кожа веднага променя излъчването на кухнята или скрина в спалнята.<br><br>
+    <strong>2. Силата на мащаба: Изкуство по стените</strong><br>
+    Вместо много малки рамки, които създават визуален шум, заложи на едно голямо платно или принт. Мащабното изкуство придава галерийно усещане и прави пространството да изглежда по-високо и престижно.<br><br>
+    <strong>3. Текстилна магия: Слоеве и материи</strong><br>
+    <strong>Завесите:</strong> Закачи ги възможно най-близо до тавана, а не точно над прозореца. Това „повдига“ стаята.<br>
+    <strong>Възглавниците:</strong> Използвай калъфки от естествени материи като лен, кадифе или букле.<br><br>
+    <strong>4. Осветлението като акцент</strong><br>
+    Една стандартна плафониера в центъра на стаята „убива“ атмосферата. Добави настолна лампа с керамична основа или висящо тяло с интересен дизайн над трапезарната маса. Светлината трябва да е топла (около 2700K).<br><br>
+    <strong>5. „Скриване“ на техниката</strong><br>
+    Кабелите са най-големият враг на луксозния интериор. Използвай кутии за кабели или ги скрий зад мебелите. Колкото по-подредено е, толкова по-скъпо изглежда.<br><br>
+    <strong>6. Аромат и живи елементи</strong><br>
+    Нищо не казва „луксозен хотел“ така, както голяма ваза със свежи цветя или качествена ароматна свещ. Вазата да е от тежко стъкло или керамика.<br><br>
+    <strong>7. Правилото на „трите“ при декорацията</strong><br>
+    Вместо да разпръскваш сувенири навсякъде, групирай декорацията на масичката за кафе в групи по три. Например: голяма книга, свещ и малка скулптура. Това придава дизайнерски завършек.`
+            },
+            'materiya': {
+                title: 'Материя и дух',
+                text: `Естествените текстури не са просто избор на обзавеждане – те са философията на вечния дом. Ето как да ги интегрирате, за да превърнете пространството си в убежище с характер.<br><br>
+        <strong>Силата на допира: Дърво и камък</strong><br>
+        Нищо не може да замене топлината на естественото дърво или благородното присъствие на камъка. Те носят със себе си историята на природата.<br>
+        <em>Съвет:</em> Вместо ламинирани плоскости, заложете на масив или естествен фурнир. Дори една малка масичка от грубо обработено дърво може да заземи цялата стая.<br><br>
+        <strong>Текстилът като втора кожа</strong><br>
+        Материите, до които се докосваме ежедневно – лен, памук, вълна – определят как се чувстваме в собствения си дом. Естествените влакна имат дълбочина, която изкуствените не могат да имитират.<br>
+        <em>Детайлът:</em> Ленените завеси филтрират светлината по мек, органичен начин, докато вълненият килим кани към уют.<br><br>
+        <strong>Благородната несъвършеност</strong><br>
+        Във високия клас дизайн властва концепцията Wabi-sabi – намиране на красота в несъвършеното. Ръчната керамика и патината върху медта придават „дух“ на интериора. Те показват, че в този дом се живее.<br><br>
+        <strong>Светлината: Духът на материята</strong><br>
+        Материите оживяват, когато светлината ги докосне. Естествените текстури създават живи сенки и променят нюансите си през деня.<br>
+        <em>Промяната:</em> Заменете студеното бяло осветление с топло. Позволете на светлината да „гали“ повърхностите.<br><br>
+        Вечният интериор не следва трендове. Той е изграден върху устойчиви материали, които остаряват красиво. Домът не е просто сбор от мебели – той е отражение на нашия собствен дух.`
+            }
+        };
+
+        const modal = document.getElementById('blogModal');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(id) {
+            modalBody.innerHTML = `
+                <h2 style="font-weight:200; letter-spacing:4px; text-transform:uppercase; margin-bottom:30px;">${blogData[id].title}</h2>
+                <div style="line-height:2.2; color:#eee; font-size:16px;">${blogData[id].text}</div>
+            `;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = (e) => { if(e.target == modal) closeModal(); }
+    </script>
+
+</body>
+</html>
